@@ -1,18 +1,17 @@
 // Selects element by class
-var timeEl = document.querySelector(".time");
+var time = document.querySelector(".time");
 
 // Selects element by id
-var mainEl = document.getElementById("main");
+var buttonEl = document.getElementById("button");
 
 var secondsLeft = 10;
 
-function setTime() {
-  // Sets interval in variable
+buttonEl.addEventListener("click", function setTime() {
   var timerInterval = setInterval(function() {
     secondsLeft--;
-    timeEl.textContent = secondsLeft + " seconds left till quiz ends.";
+    time.textContent = secondsLeft + " seconds left till quiz ends.";
 
-    if(secondsLeft === 0) {
+    if(secondsLeft === 0 || secondsLeft <0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       // Calls function to create and append image
@@ -20,7 +19,14 @@ function setTime() {
     }
 
   }, 1000);
-}
+  quizQuestions();
+  removeButton();
+});
+
+function removeButton() {
+  var elem = document.getElementById('button');
+  elem.parentNode.removeChild(elem);
+ }
 
 // Function to create and append colorsplosion image
 function sendMessage() {
@@ -28,4 +34,6 @@ function sendMessage() {
 
 }
 
-setTime();
+function quizQuestions() {
+  document.getElementById("main").textContent = "Hello World";
+}
